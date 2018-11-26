@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+        http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+
+    <!--扫描控制器-->
+	<context:component-scan base-package="cn.e3mall.controller" />
+
+    <!--会自动注册DefaultAnnotationHandlerMapping与AnnotationMethodHandlerAdapter 两个bean,是spring MVC为@Controllers分发请求所必须的。
+    并提供了：数据绑定支持，@NumberFormatannotation支持，@DateTimeFormat支持，@Valid支持，读写XML的支持（JAXB），读写JSON的支持（Jackson）。-->
+    <mvc:annotation-driven />
+
+    <!--视图解析器-->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+    <!-- 对静态资源文件的访问  方案一 （二选一） -->
+    <!--<mvc:default-servlet-handler/>-->
+
+    <!-- 对静态资源文件的访问  方案二 （二选一）-->
+	<!-- 配置资源映射 -->
+	<mvc:resources location="/css/" mapping="/css/**"/>
+	<mvc:resources location="/js/" mapping="/js/**"/>
+
+    <!-- 引用dubbo服务 -->
+    <dubbo:application name="e3-manager-web"/>
+    <dubbo:registry protocol="zookeeper" address="172.17.101.101:10017,172.17.101.102:10017,172.17.101.112:10017"/>
+    <dubbo:reference interface="cn.e3mall.service.ItemService" id="itemService" />
+
+</beans>

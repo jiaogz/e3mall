@@ -18,7 +18,7 @@ import cn.e3mall.service.ItemService;
  * <p>Company: www.itcast.cn</p> 
  * @version 1.0
  */
-@Service
+@Service(value="itemServiceImpl")
 public class ItemServiceImpl implements ItemService {
 
 	@Autowired
