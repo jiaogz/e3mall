@@ -52,6 +52,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>dubbo</artifactId>
+			<!--dubbo会引用spring2.0的jar包，避免冲突去掉-->
             <exclusions>
                 <exclusion>
                     <groupId>org.springframework</groupId>
