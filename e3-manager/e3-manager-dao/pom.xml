@@ -40,7 +40,12 @@
 			<groupId>com.alibaba</groupId>
 			<artifactId>druid</artifactId>
 		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 	<!-- 如果不添加此节点mybatis的mapper.xml文件都会被漏掉。 -->
 	<build>
 		<resources>

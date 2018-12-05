@@ -72,5 +72,10 @@
             <groupId>com.github.sgroschupf</groupId>
             <artifactId>zkclient</artifactId>
         </dependency>
-	</dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 </project>
