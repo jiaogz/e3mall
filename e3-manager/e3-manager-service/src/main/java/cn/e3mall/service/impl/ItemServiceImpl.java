@@ -1,8 +1,13 @@
 package cn.e3mall.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import cn.e3mall.common.pojo.EasyUIDataGridResult;
+import cn.e3mall.common.utils.E3Result;
+import cn.e3mall.common.utils.IDUtils;
+import cn.e3mall.mapper.TbItemDescMapper;
+import cn.e3mall.pojo.TbItemDesc;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +31,9 @@ public class ItemServiceImpl implements ItemService {
 
 	@Autowired
 	private TbItemMapper itemMapper;
+
+	@Autowired
+    private TbItemDescMapper itemDescMapper;
 	
 	@Override
 	public TbItem getItemById(long itemId) {
@@ -63,5 +71,45 @@ public class ItemServiceImpl implements ItemService {
         return result;
 
 	}
+
+	@Override
+	public E3Result saveItem(TbItem tbItem, String desc) {
+
+	    long itemId = IDUtils.genItemId();
+	    Date date = new Date();
+        //补全商品属性
+	    tbItem.setId(itemId);
+	    tbItem.setStatus((byte) 1);
+	    tbItem.setCreated(date);
+	    tbItem.setUpdated(date);
+
+	    itemMapper.insert(tbItem);
+
+	    //新增商品描述
+        TbItemDesc tbItemDesc = new TbItemDesc();
+        // 5、补全TbItemDesc的属性
+        tbItemDesc.setItemId(itemId);
+        tbItemDesc.setItemDesc(desc);
+        tbItemDesc.setCreated(date);
+        tbItemDesc.setUpdated(date);
+
+        itemDescMapper.insert(tbItemDesc);
+
+		return E3Result.ok();
+	}
+
+    @Override
+    public E3Result deleItemByID(Long ids) {
+
+	    TbItemExample tbItemExample = new TbItemExample();
+        Criteria criteria = tbItemExample.createCriteria();
+        criteria.andIdEqualTo(ids);
+        int i = itemMapper.deleteByExample(tbItemExample);
+
+        if (i!= 0){
+            return E3Result.ok();
+        }
+        return null;
+    }
 
 }

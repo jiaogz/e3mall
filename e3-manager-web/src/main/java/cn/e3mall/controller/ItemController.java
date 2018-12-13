@@ -2,6 +2,7 @@ package cn.e3mall.controller;
 
 import cn.e3mall.common.pojo.EasyUIDataGridResult;
 import cn.e3mall.common.pojo.EasyUITreeNode;
+import cn.e3mall.common.utils.E3Result;
 import cn.e3mall.service.ItemCatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,7 +32,11 @@ public class ItemController {
     @Autowired
     private ItemCatService itemCatService;
 
-
+    /**
+     * 根据商品ID查询
+     * @param itemId
+     * @return
+     */
     @RequestMapping("/item/{itemId}")
     @ResponseBody
     public TbItem getItemById(@PathVariable Long itemId) {
@@ -39,7 +44,12 @@ public class ItemController {
         return tbItem;
     }
 
-
+    /**
+     * 分页查询商品列表
+     * @param page
+     * @param rows
+     * @return
+     */
     @RequestMapping("/item/list")
     @ResponseBody
     public EasyUIDataGridResult getItemList(Integer page, Integer rows) {
@@ -47,12 +57,45 @@ public class ItemController {
         return result;
     }
 
+    /**
+     * 商品类目
+     * @param parentId
+     * @return
+     */
     @RequestMapping("/item/cat/list")
     @ResponseBody
     public List<EasyUITreeNode> getItemCat(@RequestParam(value = "id", defaultValue = "0") Long parentId) {
         List<EasyUITreeNode> catList = itemCatService.getCatList(parentId);
 
         return catList;
+    }
+
+    /**
+     * 新增商品
+     * @param tbItem 商品信息
+     * @param desc 商品描述
+     * @return
+     */
+    @RequestMapping("/item/save")
+    @ResponseBody
+    public E3Result saveItem(TbItem tbItem, String desc){
+
+        E3Result e3Result = itemService.saveItem(tbItem, desc);
+
+        return e3Result;
+    }
+
+    /**
+     * 删除商品
+     * @param ids
+     * @return
+     */
+    @RequestMapping("/rest/item/delete")
+    @ResponseBody
+    public E3Result deleItemByID(long ids){
+
+        E3Result e3Result = itemService.deleItemByID(ids);
+        return e3Result;
     }
 
 
