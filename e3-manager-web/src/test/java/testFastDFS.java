@@ -14,7 +14,7 @@ public class testFastDFS {
     public void testUpload() throws Exception{
 
         //1.加载全局文件
-        ClientGlobal.init("E:\\e3mall\\e3-manager-web\\src\\main\\resources\\conf\\client.conf");
+        ClientGlobal.init("E:\\e3parent\\e3-manager-web\\target\\classes\\conf\\client.conf");
 
         //2.创建trackerClient
         TrackerClient trackerClient = new TrackerClient();
@@ -25,7 +25,7 @@ public class testFastDFS {
         //2.初始化storageClient
         StorageClient storageClient = new StorageClient(trackerServer,null);
 
-        String[] strings = storageClient.upload_file("", "jpg", null);
+        String[] strings = storageClient.upload_file("F:\\download\\360SoftMgrSafeRun\\9a80e2d06170b6bb01046233ede701b3.jpg", "jpg", null);
 
         for (String str: strings) {
 
@@ -36,9 +36,9 @@ public class testFastDFS {
     @Test
     public void testFastDFSClient() throws Exception{
 
-        FastDFSClient fastDFSClient = new FastDFSClient("E:\\e3mall\\e3-manager-web\\src\\main\\resources\\conf\\client.conf");
+        FastDFSClient fastDFSClient = new FastDFSClient("E:\\e3parent\\e3-manager-web\\target\\classes\\conf\\client.conf");
 
-        String file = fastDFSClient.uploadFile("");
+        String file = fastDFSClient.uploadFile("F:\\download\\360SoftMgrSafeRun\\b463a2b010033397a2dcd09aa6f57d0c.jpg");
 
         System.out.println(file);
     }

@@ -28,11 +28,12 @@ public class uploadControl {
             String originalFilename = uploadFile.getOriginalFilename();
             String extName = originalFilename.substring(originalFilename.lastIndexOf(".") + 1);
             //2、创建一个FastDFS的客户端
-            FastDFSClient fastDFSClient = new FastDFSClient("classpath:resource/conf/client.conf");
+            FastDFSClient fastDFSClient = new FastDFSClient("classpath:conf/client.conf");
             //3、执行上传处理
             String path = fastDFSClient.uploadFile(uploadFile.getBytes(), extName);
             //4、拼接返回的url和ip地址，拼装成完整的url
             String url = IMAGE_SERVER_URL + path;
+            System.out.println("URL:"+url);
             //5、返回map
             Map result = new HashMap<>();
             result.put("error", 0);
