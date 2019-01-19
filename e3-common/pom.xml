@@ -64,6 +64,11 @@
             <artifactId>fastdfs_client</artifactId>
             <version>1.25</version>
         </dependency>
+        <!--redis客户端-->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+        </dependency>
         <!--解析Excel-->
         <dependency>
             <groupId>org.jxls</groupId>

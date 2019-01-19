@@ -1,4 +1,4 @@
-package cn.e3mall.content.service.impl;
+package cn.e3mall.search.service.impl;
 
 import java.util.ArrayList;
 import java.util.Date;

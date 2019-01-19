@@ -38,8 +38,10 @@ public class testFastDFS {
 
         FastDFSClient fastDFSClient = new FastDFSClient("E:\\e3parent\\e3-manager-web\\target\\classes\\conf\\fdfs_client.conf");
 
-        String file = fastDFSClient.uploadFile("F:\\download\\360SoftMgrSafeRun\\b463a2b010033397a2dcd09aa6f57d0c.jpg");
+//        String file = fastDFSClient.uploadFile("F:\\download\\360SoftMgrSafeRun\\b463a2b010033397a2dcd09aa6f57d0c.jpg");
 
-        System.out.println(file);
+        boolean deleteFile = fastDFSClient.deleteFile("group1/M00/00/00/wKj2glwoI7yAWSNwAAJSwatA88c768.jpg");
+
+        System.out.println(deleteFile);
     }
 }
