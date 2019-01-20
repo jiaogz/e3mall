@@ -1,4 +1,4 @@
-package cn.e3mall.search.service.impl;
+package cn.e3mall.content.service.impl;
 
 import java.util.Date;
 import java.util.List;
@@ -7,6 +7,7 @@ import cn.e3mall.common.utils.JedisClient;
 import cn.e3mall.common.utils.JsonUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import cn.e3mall.common.utils.E3Result;
@@ -31,10 +32,11 @@ public class ContentServiceImpl implements ContentService {
 	@Autowired
 	private TbContentMapper contentMapper;
 
-	@Resource
+	@Autowired
 	private JedisClient jedisClient;
 
-	private static String CONTENT_KEY="CONTENT_LIST";
+	@Value("${CONTENT_KEY}")
+	private  String CONTENT_KEY;
 
 	@Override
 	public E3Result addContent(TbContent content) {

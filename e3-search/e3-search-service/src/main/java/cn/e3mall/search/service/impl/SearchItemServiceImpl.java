@@ -2,15 +2,13 @@ package cn.e3mall.search.service.impl;
 
 import cn.e3mall.common.pojo.SearchItem;
 import cn.e3mall.common.utils.E3Result;
-import cn.e3mall.search.mapper.ItemMapper.ItemMapper;
+import cn.e3mall.search.mapper.ItemMapper;
 import cn.e3mall.search.service.SearchItemService;
-import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrServer;
 import org.apache.solr.common.SolrInputDocument;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.naming.directory.SearchResult;
 import java.util.List;
 
 /**

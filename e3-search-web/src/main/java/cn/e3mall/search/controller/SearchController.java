@@ -1,5 +1,6 @@
 package cn.e3mall.search.controller;
 
+import cn.e3mall.search.service.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -8,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import cn.e3mall.common.pojo.SearchResult;
-import cn.e3mall.search.service.SearchService;
 
 /**
  * 商品搜索Controller

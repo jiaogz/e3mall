@@ -1,4 +1,4 @@
-package cn.e3mall.search.mapper.ItemMapper;
+package cn.e3mall.search.mapper;
 
 import cn.e3mall.common.pojo.SearchItem;
 
