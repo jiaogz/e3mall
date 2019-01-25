@@ -1,9 +1,7 @@
 package cn.e3mall.search.dao;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
+import cn.e3mall.common.pojo.SearchItem;
+import cn.e3mall.common.pojo.SearchResult;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrServer;
 import org.apache.solr.client.solrj.response.QueryResponse;
@@ -11,10 +9,10 @@ import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import cn.e3mall.common.pojo.SearchItem;
-import cn.e3mall.common.pojo.SearchResult;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 商品搜索dao
