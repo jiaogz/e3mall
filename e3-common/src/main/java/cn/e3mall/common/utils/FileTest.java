@@ -1,6 +1,7 @@
 package cn.e3mall.common.utils;
 
 import java.io.*;
+import java.util.Arrays;
 
 public class FileTest {
 
@@ -192,7 +193,34 @@ public class FileTest {
 
     public static void main(String[] args) {
         File file = new File("C:\\Users\\Administrator\\Desktop\\外域邮件发件人.txt");
-        String str = "@wo.com";
-        bufferedWriteAndFileWriterTest(file,10,str);
+        String str = "迟天固 13305694297@wo.cn,阳宁博 13902354276@wo.cn,西冠 15106356769@wo.cn,";
+//        bufferedWriteAndFileWriterTest(file,100000,str);
+
+//        String[] s = str.split(" ");
+//        System.out.println(s[0]);
+//        String businessCategoryTypeId="";
+//        System.out.println(! "BUSINESS_EXTERNAL".equals(businessCategoryTypeId));
+
+//        System.out.println(str.substring(0,str.indexOf("@")));
+
+//        System.out.println(str.toUpperCase());
+
+        String[] strings = str.split(",");
+//        for (int i = 0; i < 10; i++) {
+//            int index = (int) (Math.random() * (strings.length));
+//            System.out.println(index);
+//        }
+        int i = (int) (Math.random() * (strings.length));
+        System.out.println(i);
+        System.out.println(strings[strings.length-1]);
+        strings[i] = strings[strings.length-1];
+        strings = Arrays.copyOf(strings,strings.length-1);
+        System.out.println(strings.length);
+        System.out.println(Arrays.toString(strings));
+
+
+
+
+
     }
 }
