@@ -1,23 +1,25 @@
 package cn.e3mall.service.impl;
 
-import java.util.Date;
-import java.util.List;
-
 import cn.e3mall.common.pojo.EasyUIDataGridResult;
 import cn.e3mall.common.utils.E3Result;
 import cn.e3mall.common.utils.IDUtils;
 import cn.e3mall.mapper.TbItemDescMapper;
-import cn.e3mall.pojo.TbItemDesc;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import cn.e3mall.mapper.TbItemMapper;
 import cn.e3mall.pojo.TbItem;
+import cn.e3mall.pojo.TbItemDesc;
 import cn.e3mall.pojo.TbItemExample;
 import cn.e3mall.pojo.TbItemExample.Criteria;
 import cn.e3mall.service.ItemService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.core.JmsTemplate;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import javax.print.attribute.standard.Destination;
+import java.util.Date;
+import java.util.List;
 
 /**
  * 商品管理Service
@@ -34,6 +36,13 @@ public class ItemServiceImpl implements ItemService {
 
 	@Autowired
     private TbItemDescMapper itemDescMapper;
+
+	@Autowired
+    private JmsTemplate jmsTemplate;
+
+//	根据ID导入
+	@Resource
+    private Destination topicDestination;
 	
 	@Override
 	public TbItem getItemById(long itemId) {
@@ -75,7 +84,7 @@ public class ItemServiceImpl implements ItemService {
 	@Override
 	public E3Result saveItem(TbItem tbItem, String desc) {
 
-	    long itemId = IDUtils.genItemId();
+	    final long itemId = IDUtils.genItemId();
 	    Date date = new Date();
         //补全商品属性
 	    tbItem.setId(itemId);
@@ -95,6 +104,15 @@ public class ItemServiceImpl implements ItemService {
 
         itemDescMapper.insert(tbItemDesc);
 
+        //发送消息
+//        jmsTemplate.send(topicDestination, new MessageCreator() {
+//            @Override
+//            public Message createMessage(Session session) throws JMSException {
+//                TextMessage message = session.createTextMessage(itemId +"");
+//                return message;
+//            }
+//        });
+
 		return E3Result.ok();
 	}
 
@@ -110,6 +128,12 @@ public class ItemServiceImpl implements ItemService {
             return E3Result.ok();
         }
         return null;
+    }
+
+    @Override
+    public TbItemDesc getItemDescById(Long itemId) {
+        TbItemDesc tbItemDesc = itemDescMapper.selectByPrimaryKey(itemId);
+        return tbItemDesc;
     }
 
 }
