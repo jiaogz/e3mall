@@ -6,6 +6,7 @@ import cn.e3mall.sso.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -24,11 +25,12 @@ public class LoginController {
     private String TOKEN_NAME;
 
     /**
-     * 跳转到登陆页
+     * 跳转到登陆页,redirect为登录成功后的回调地址，若为空跳转到首页
      * @return
      */
     @RequestMapping("/page/login")
-    public String showLogin(){
+    public String showLogin(String redirect, Model model){
+        model.addAttribute("redirect",redirect);
         return "login";
     }
 

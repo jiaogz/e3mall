@@ -107,7 +107,23 @@ public class CartServiceImpl implements CartService {
         return E3Result.ok();
     }
 
+    /**
+     * 清空购物车
+     * @param userId
+     * @return
+     */
+    @Override
+    public E3Result cleanCartAll(long userId) {
+        jedisClient.del(REDIS_CART_NAME + ":" + userId);
+        return E3Result.ok();
+    }
 
+    /**
+     * 从redis中获取购物车商品信息
+     * @param userId
+     * @param itemId
+     * @return
+     */
     private TbItem getTbitemByRedis(long userId,long itemId) {
         Boolean hexists = jedisClient.hexists(REDIS_CART_NAME + ":" + userId, itemId + "");
         //存在修改数量
