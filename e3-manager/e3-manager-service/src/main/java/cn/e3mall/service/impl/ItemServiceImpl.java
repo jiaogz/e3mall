@@ -12,8 +12,8 @@ import cn.e3mall.pojo.TbItemDesc;
 import cn.e3mall.pojo.TbItemExample;
 import cn.e3mall.pojo.TbItemExample.Criteria;
 import cn.e3mall.service.ItemService;
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -99,16 +99,18 @@ public class ItemServiceImpl implements ItemService {
         PageHelper.startPage(page,rows);
 
         TbItemExample tbItemExample = new TbItemExample();
+        Page<TbItem> tbItems = (Page<TbItem>) itemMapper.selectByExample(tbItemExample);
 
-        List<TbItem> tbItems = itemMapper.selectByExample(tbItemExample);
-
-        //取分页信息
-        PageInfo<TbItem> pageInfo = new PageInfo<>(tbItems);
-
+//        List<TbItem> tbItems = itemMapper.selectByExample(tbItemExample);
+//
+//        //取分页信息
+//        PageInfo<TbItem> pageInfo = new PageInfo<>(tbItems);
+//
         //创建返回结果对象
         EasyUIDataGridResult result = new EasyUIDataGridResult();
-        result.setTotal(pageInfo.getTotal());
+        result.setTotal(tbItems.getTotal());
         result.setRows(tbItems);
+
 
         return result;
 

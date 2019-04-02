@@ -29,7 +29,8 @@
     <!--登录拦截器-->
     <mvc:interceptors>
         <mvc:interceptor>
-            <mvc:mapping path="/**"/>
+			<!--包含当前路径及其子路径-->
+            <mvc:mapping path="/**" />
             <bean class="cn.e3mall.order.intercept.LoginIntercept"/>
         </mvc:interceptor>
     </mvc:interceptors>
